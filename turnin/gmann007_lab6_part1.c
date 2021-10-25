@@ -44,7 +44,7 @@ void TimerSet (unsigned long M) {
 	_avr_timer_cntcurr = _avr_timer_M;
 }
 
-enum States {Start,On_ Light1,On_ Light2,On_ Light3} state;
+enum States {Start,On_Light1,On_Light2,On_Light3} state;
 
 void Tick() {
 	switch(state) {
@@ -63,16 +63,15 @@ void Tick() {
 	}
 }
 
-void main(void) {
+int main(void) {
     DDRB = 0xFF;
     PORTB = 0x00;
     TimerSet(1000);
     TimerOn();
-    unsigned char tmpB = 0x00;
     while (1) {
 	Tick();
 	while(!TimerFlag) {};
 	TimerFlag = 0;
     }
-    return 1;
+    
 }
